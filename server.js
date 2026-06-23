@@ -1,0 +1,36 @@
+const express = require('express');
+const bwipjs = require('bwip-js');
+
+const app = express();
+
+app.get('/barcode', async (req, res) => {
+    try {
+        const data = req.query.data;
+
+        if (!data) {
+            return res.status(400).send('Missing data');
+        }
+
+        const png = await bwipjs.toBuffer({
+            bcid: 'gs1-128',
+            text: data,
+            scale: 3,
+            height: 12,
+            includetext: true,
+            textsize: 8
+        });
+
+        res.writeHead(200, {
+            'Content-Type': 'image/png',
+            'Cache-Control': 'public,max-age=31536000'
+        });
+
+        res.end(png);
+    }
+    catch (e) {
+        res.status(500).send(e.toString());
+    }
+});
+
+const port = process.env.PORT || 3000;
+app.listen(port);
