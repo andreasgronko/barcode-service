@@ -14,7 +14,7 @@ app.get('/barcode', async (req, res) => {
         const png = await bwipjs.toBuffer({
             bcid: 'gs1-128',
             text: data,
-            scale: 4,
+            scale: 3,
             height: 18,
             includetext: true,
             textsize: 10,
