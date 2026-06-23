@@ -19,13 +19,15 @@ app.get('/barcode', async (req, res) => {
             includetext: true,
             textsize: 10,
             backgroundcolor: 'FFFFFF',
-            paddingwidth: 10,
-            paddingheight: 10
+            barcolor: '000000',
+            paddingwidth: 20,
+            paddingheight: 20,
+            monochrome: false
         });
 
         res.writeHead(200, {
             'Content-Type': 'image/png',
-            'Cache-Control': 'public, max-age=31536000'
+            'Cache-Control': 'no-store'
         });
 
         res.end(png);
