@@ -20,8 +20,8 @@ app.get('/barcode', async (req, res) => {
             textsize: 10,
             backgroundcolor: 'FFFFFF',
             barcolor: '000000',
-            paddingwidth: 20,
-            paddingheight: 20,
+            paddingwidth: 2,
+            paddingheight: 2,
             monochrome: false
         });
 
