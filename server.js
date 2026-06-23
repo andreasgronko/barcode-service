@@ -78,6 +78,11 @@ app.get('/barcode', async (req, res) => {
             paddingheight: 0
         };
 
+        // Visa text utan Code39/Code93 start- och stopptecken (*)
+        if (type === 'code39' || type === 'code93') {
+            options.alttext = data;
+        }
+
         const png = await bwipjs.toBuffer(options);
 
         res.writeHead(200, {
